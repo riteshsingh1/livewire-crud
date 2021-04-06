@@ -5,12 +5,12 @@
     "version": "1.0.0",
     "authors": [
         {
-            "name": "author name",
-            "email": "author email",
-            "homepage": "author homepage"
+            "name": "Ritesh Singh",
+            "email": "hello@imritesh.com",
+            "homepage": "https://imritesh.com"
         }
     ],
-    "homepage": "https://github.com/imritesh/livecrud",
+    "homepage": "https://github.com/riteshsingh1/livewire-crud",
     "keywords": ["Laravel", "LiveCrud"],
     "require": {
         "illuminate/support": "~7|~8"
