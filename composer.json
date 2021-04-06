@@ -1,6 +1,6 @@
 {
     "name": "imritesh/livecrud",
-    "description": ":package_description",
+    "description": "Generate Basic Crud Operations With Livewire and Tailwind Css For Laravel",
     "license": "license",
     "version": "1.0.0",
     "authors": [
