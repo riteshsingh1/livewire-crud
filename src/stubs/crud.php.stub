@@ -1,0 +1,121 @@
+<?php
+
+namespace {{ namespace }};
+
+{{ useclasses }}
+
+class {{ name }} extends Component
+{
+    use WithPagination;
+
+    public $paginate = 10;
+
+    {{ properties }}
+
+    public $mode = 'create';
+
+    public $showForm = false;
+
+    public $primaryId = null;
+
+    public $search;
+
+    public $showConfirmDeletePopup = false;
+
+    {{ rules }}
+
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function render()
+    {
+        {{ query }}
+        return view('livewire.{{ blade }}', [
+            'rows'=> $model
+        ]);
+    }
+
+
+    public function create ()
+    {
+        $this->mode = 'create';
+        $this->showForm = true;
+    }
+
+
+    public function edit($primaryId)
+    {
+        $this->mode = 'update';
+        $this->primaryId = $primaryId;
+        $model = Model::find($primaryId);
+
+        {{ setedibleval }}
+
+
+        $this->showForm = true;
+    }
+
+    public function closeForm()
+    {
+        $this->showForm = false;
+    }
+
+    public function store()
+    {
+          $this->validate();
+
+          $model = new Model();
+
+          {{ codeTosave }}
+
+          $this->resetForm();
+          session()->flash('message', 'Record Saved Successfully');
+          $this->showForm = false;
+    }
+
+    public function resetForm()
+    {
+        {{ reset }}
+    }
+
+
+    public function update()
+    {
+          $this->validate();
+
+          $model = Model::find($this->primaryId);
+
+          {{ codeTosave }}
+
+          $this->resetForm();
+
+         session()->flash('message', 'Record Updated Successfully');
+    }
+
+    public function confirmDelete($primaryId)
+    {
+        $this->primaryId = $primaryId;
+        $this->showConfirmDeletePopup = true;
+    }
+
+    public function destroy()
+    {
+        Model::find($this->primaryId)->delete();
+        $this->showConfirmDeletePopup = false;
+        session()->flash('message', 'Record Deleted Successfully');
+    }
+
+    public function clearFlash()
+    {
+        session()->forget('message');
+    }
+
+}
