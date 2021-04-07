@@ -1,5 +1,13 @@
 # LiveCrud
 
+
+![Packagist License](https://img.shields.io/packagist/l/imritesh/livecrud)
+![Packagist Downloads](https://img.shields.io/packagist/dt/imritesh/livecrud)
+![Packagist Version](https://img.shields.io/packagist/v/imritesh/livewire)
+
+
+
+
 Live Crud Generator. This package generates Basic Crud with Livewire.
 
 ![](./livewire-crud.gif)
