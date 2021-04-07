@@ -18,6 +18,7 @@ class Crud extends GeneratorCommand
     {
         parent::handle();
 
+
         // Get the fully qualified class name (FQN)
         $class = $this->qualifyClass($this->getNameInput());
 
@@ -25,11 +26,14 @@ class Crud extends GeneratorCommand
         $path = $this->getPath($class);
         $content = file_get_contents($path);
         // Update the file content with additional data (regular expressions)
-        $content = $this->buildContent($content);
+        $this->info('Generating Livewire Component');
 
+        $content = $this->buildContent($content);
         file_put_contents($path, $content);
-        $this->info('Component Generated',);
+        $this->info('Livewire Component Generated');
+
         $this->info('Generating View');
+
         Artisan::call('crud:view', ['name' => $this->arguments()['name']]);
     }
 
@@ -114,6 +118,9 @@ class Crud extends GeneratorCommand
     {
         $class = 'App\\Models\\' . $this->arguments()['name'];
         $model = new $class;
+        if (!class_exists($class)){
+            throw new \Exception('Model Not Found. Please Check if Model Exists at -'.$class);
+        }
         $columns = $model->getFillable();
         $str = '';
         $c = 1;
@@ -185,10 +192,20 @@ class Crud extends GeneratorCommand
      */
     protected function getStub()
     {
+        $this->checkIfModelExists();
+
         if (file_exists(base_path() . '/stubs/crud.php.stub')){
             return base_path() . '/stubs/crud.php.stub';
         }
         return base_path().'/vendor/imritesh/livecrud/src/stubs/crud.php.stub';
+    }
+
+    public function checkIfModelExists()
+    {
+        $class = 'App\\Models\\' . $this->arguments()['name'];
+        if (!class_exists($class)){
+            throw new \Exception('Model Not Found. Please Check if Model Exists at -'.$class);
+        }
     }
 
 }

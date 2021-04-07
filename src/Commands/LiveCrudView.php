@@ -13,6 +13,12 @@ class LiveCrudView extends GeneratorCommand
 
     protected $description = 'Generate View For Crud Command';
 
+
+    protected $emailNames = [
+      'email',
+      'email_address',
+    ];
+
     public function handle()
     {
         if (!is_dir(resource_path('views/livewire'))){
@@ -22,6 +28,8 @@ class LiveCrudView extends GeneratorCommand
         $content = file_get_contents($this->getStub());
         $content = $this->buildContent($content);
         file_put_contents($viewPath, $content);
+
+        $this->info('View Generated');
     }
 
     public function buildContent($content)
@@ -58,9 +66,23 @@ class LiveCrudView extends GeneratorCommand
 
     public function makeInput($name)
     {
+        $type = $this->getType($name);
         $label = ucfirst(str_replace('-', ' ', Str::slug($name)));
         $message = '{{ $message }}';
-        return "<div><label class='block'><span class='text-gray-700 @error('{$name}') text-red-500  @enderror'>{$label}</span><input type='text' class='mt-1 block w-full rounded-md border-gray-300 shadow-sm @error('{$name}')  border-red-500 @enderror focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50' wire:model='{$name}'>@error('{$name}')<span class='text-red-500 text-sm'>{$message}</span>@enderror</label></div>";
+        return "<div><label class='block'><span class='text-gray-700 @error('{$name}') text-red-500  @enderror'>{$label}</span><input type='{$type}' class='mt-1 block w-full rounded-md border-gray-300 shadow-sm @error('{$name}')  border-red-500 @enderror focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50' wire:model='{$name}'>@error('{$name}')<span class='text-red-500 text-sm'>{$message}</span>@enderror</label></div>";
+    }
+
+    public function getType($name)
+    {
+        if(in_array(strtolower($name), $this->emailNames))
+        {
+            return 'email';
+        }
+        if (strtolower($name) == 'password')
+        {
+            return 'password';
+        }
+        return 'text';
     }
 
     public function getRenderedData()
@@ -126,9 +148,15 @@ class LiveCrudView extends GeneratorCommand
      * Get the stub file for the generator.
      *
      * @return string
+     * @throws \Exception
      */
     protected function getStub()
     {
+        if (config('livecrud.template') != 'tailwind')
+        {
+            throw new \Exception(config('livecrud.template').' is not currently supported, only supported template is tailwind css');
+        }
+
         if (file_exists(base_path() . '/stubs/view.php.stub')){
             return base_path() . '/stubs/view.php.stub';
         }
