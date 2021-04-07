@@ -1,35 +1,50 @@
 # LiveCrud
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
+Live Crud Generator. This package generates Basic Crud with Livewire.
 
-This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
+![](./livewire-crud.gif)
+
+## Features
+ - Generate Complete Crud With Livewire Component and Blade Files
+ - Create / Update / Delete Functional
+ - Real Time Validation Already Added
+ - Fuzzy Search Functional
 
 ## Installation
 
 Via Composer
 
 ``` bash
-$ composer require imritesh/livecrud
+composer require imritesh/livecrud
 ```
+
+## Prerequisites
+- Models should be in `app/Models`  directory
+- Crud of only $fillable property will be generated 
+```php 
+protected $fillable = ['name','username'];
+``` 
 
 ## Usage
-
-## Change log
-
-Please see the [changelog](changelog.md) for more information on what has changed recently.
-
-## Testing
-
-``` bash
-$ composer test
+```bash
+php artisan crud:make Name_Of_Your_Model
 ```
 
-## Contributing
+- This Command Will Generate Two Files
+    - First Will be in `app/HttpLivewire`
+    - Second Will be in `resources/views/Livewire`
 
-Please see [contributing.md](contributing.md) for details and a todolist.
+
+
+
+
+## Limitations
+- This Packages uses [Tailwind CSS V2](https://tailwindcss.com/)
+
+## TODO
+- Bootstrap 4 & 5 Support
+- Bulma Support
+
 
 ## Security
 
@@ -37,21 +52,8 @@ If you discover any security related issues, please email author email instead o
 
 ## Credits
 
-- [author name][link-author]
-- [All Contributors][link-contributors]
+- [Ritesh Singh](https://imritesh.com)
 
 ## License
 
-license. Please see the [license file](license.md) for more information.
-
-[ico-version]: https://img.shields.io/packagist/v/imritesh/livecrud.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/imritesh/livecrud.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/imritesh/livecrud/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
-
-[link-packagist]: https://packagist.org/packages/imritesh/livecrud
-[link-downloads]: https://packagist.org/packages/imritesh/livecrud
-[link-travis]: https://travis-ci.org/imritesh/livecrud
-[link-styleci]: https://styleci.io/repos/12345678
-[link-author]: https://github.com/imritesh
-[link-contributors]: ../../contributors
+license. Please see the [license file](https://github.com/riteshsingh1/livewire-crud/blob/master/license.md) for more information.
