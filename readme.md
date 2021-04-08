@@ -3,7 +3,7 @@
 
 ![Packagist License](https://img.shields.io/packagist/l/imritesh/livecrud)
 ![Packagist Downloads](https://img.shields.io/packagist/dt/imritesh/livecrud)
-![Packagist Version](https://img.shields.io/packagist/v/imritesh/livewire)
+![Packagist Version](https://img.shields.io/packagist/v/imritesh/livecrud)
 
 
 
