@@ -197,7 +197,7 @@ class Crud extends GeneratorCommand
         if(config('livecrud.template') == 'bootstrap')
         {
             if (file_exists(base_path() . '/stubs/bootstrap.crud.php.stub')){
-                return base_path() . '/stubs/bootstrap.view.php.stub';
+                return base_path() . '/stubs/bootstrap.crud.php.stub';
             }
             return base_path().'/vendor/imritesh/livecrud/src/stubs/bootstrap.crud.php.stub';
         }
