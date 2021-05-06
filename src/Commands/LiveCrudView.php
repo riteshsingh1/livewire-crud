@@ -69,7 +69,17 @@ class LiveCrudView extends GeneratorCommand
         $type = $this->getType($name);
         $label = ucfirst(str_replace('-', ' ', Str::slug($name)));
         $message = '{{ $message }}';
-        return "<div><label class='block'><span class='text-gray-700 @error('{$name}') text-red-500  @enderror'>{$label}</span><input type='{$type}' class='mt-1 block w-full rounded-md border-gray-300 shadow-sm @error('{$name}')  border-red-500 @enderror focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50' wire:model='{$name}'>@error('{$name}')<span class='text-red-500 text-sm'>{$message}</span>@enderror</label></div>";
+        if(config('livecrud.template') == 'tailwind')
+        {
+            return "<div><label class='block'><span class='text-gray-700 @error('{$name}') text-red-500  @enderror'>{$label}</span><input type='{$type}' class='mt-1 block w-full rounded-md border-gray-300 shadow-sm @error('{$name}')  border-red-500 @enderror focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50' wire:model='{$name}'>@error('{$name}')<span class='text-red-500 text-sm'>{$message}</span>@enderror</label></div>";
+        }
+        if(config('livecrud.template') == 'bootstrap')
+        {
+            return "<div class='form-group'><label for='{$name}'>{$label}</label><input type='{$type}' class='form-control @error('{$name}')  is-invalid @enderror' wire:model='{$name}'>@error('{$name}')<div class='invalid-feedback'>{$message}</div>@enderror</div>";
+
+        }
+
+
     }
 
     public function getType($name)
