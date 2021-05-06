@@ -1,0 +1,135 @@
+<div>
+    @if (session()->has('message'))
+        <div class="flex mx-auto">
+            <div class="alert alert-success">
+                <span class="inline-block align-middle mr-8">
+                <b class="capitalize">Success!</b> {{ session('message') }}
+                </span>
+                <button wire:click="clearFlash()"
+                        class="float-right btn-xs btn-success btn-outline">
+                    <span>×</span>
+                </button>
+            </div>
+        </div>
+    @endif
+    <div>
+        <div class="row">
+            <div class="col-md-3">
+                <input wire:model="search"
+                       class="form-control"
+                       id="search" type="text" name="search" wire:model="search" required="required"
+                       autofocus="autofocus"/>
+            </div>
+            <div class="col-md-9 float-right">
+                <button type="button"
+                        class="btn btn-primary float-right"
+                        data-toggle="modal" data-target="#exampleModal"
+                        wire:click="create">
+                    Add New User
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="flex row">
+            <div class="card-body">
+                <table width="100%" class="table table-bordered">
+                    <thead>
+                    <tr>
+
+                        <th scope="col">
+                            NAME
+                        </th>
+
+                        <th scope="col">
+                            EMAIL
+                        </th>
+
+                        <th scope="col">
+                            PASSWORD
+                        </th>
+
+
+                        <th scope="col">
+                           <span class="float-right">Actions</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($rows as $row)
+                        <tr>
+                            <td>{{ $row->name}}</td>
+
+                            <td>{{ $row->email}}</td>
+
+                            <td>{{ $row->password}}</td>
+
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="void(0)" class="text-indigo-600 hover:text-indigo-900"
+                                   wire:click="edit({{ $row->id }})" data-toggle="modal" data-target="#exampleModal">Edit</a>
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900"
+                                   wire:click="confirmDelete({{ $row->id }})">Delete</a>
+                            </td>
+                        </tr>@endforeach
+
+                    </tbody>
+                </table>
+                <div class="p-2">
+                    {{ $rows->links() }}
+                </div>
+        </div>
+
+
+    </div>
+
+
+    {{--    create / edit form --}}
+       <div wire:ignore>
+           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <h5 class="modal-title" id="exampleModalLabel"> {{ $mode == 'create' ? 'Add New Record' : 'Update Record ' }}</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                            {{ form }}
+                       </div>
+                       <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                           <button type="button" @if($mode == 'create') wire:click="store()" @else wire:click="update()" @endif  class="btn btn-primary">
+                             {{ $mode == 'create' ? 'Save Record' : 'Update Record' }}
+                           </button>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+    {{--    /create /edit form--}}
+
+
+    {{--    delete popup--}}
+    <div wire:ignore>
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Are You Sure?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                           This Action Can not be Undone.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" wire:click="destroy()" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{--    /delete popup--}}
+</div>
