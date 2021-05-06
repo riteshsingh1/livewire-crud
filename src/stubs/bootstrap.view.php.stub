@@ -6,7 +6,7 @@
                 <b class="capitalize">Success!</b> {{ session('message') }}
                 </span>
                 <button wire:click="clearFlash()"
-                        class="float-right btn-xs btn-success btn-outline">
+                        class="float-right btn-xs btn btn-outline-success">
                     <span>×</span>
                 </button>
             </div>
@@ -23,7 +23,6 @@
             <div class="col-md-9 float-right">
                 <button type="button"
                         class="btn btn-primary float-right"
-                        data-toggle="modal" data-target="#exampleModal"
                         wire:click="create">
                     Add New User
                 </button>
@@ -33,16 +32,17 @@
     <div class="flex row">
             <div class="card-body">
                 <table width="100%" class="table table-bordered">
+                    <thead>
                     <tr>
 
                         {{ headings }}
 
-                        <th scope="col" class="relative px-6 py-3">
+                        <th scope="col">
                             <span class="sr-only">Actions</span>
                         </th>
                     </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody>
                     {{ renderedData }}
                     </tbody>
                 </table>
@@ -57,11 +57,11 @@
 
     {{--    create / edit form --}}
 
-       <div class="modal fade" wire:ignore.self id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <div class="modal fade" wire:ignore.self id="showForm" tabindex="-1" role="dialog" aria-labelledby="showFormLabel" aria-hidden="true">
            <div class="modal-dialog" role="document">
                <div class="modal-content">
                    <div class="modal-header">
-                       <h5 class="modal-title" id="exampleModalLabel"> {{ $mode == 'create' ? 'Add New Record' : 'Update Record ' }}</h5>
+                       <h5 class="modal-title" id="showFormLabel"> {{ $mode == 'create' ? 'Add New Record' : 'Update Record ' }}</h5>
                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                            <span aria-hidden="true">&times;</span>
                        </button>
