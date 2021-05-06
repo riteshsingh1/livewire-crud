@@ -46,11 +46,33 @@ php artisan crud:make Name_Of_Your_Model
 
 
 
-## Limitations
-- This Packages uses [Tailwind CSS V2](https://tailwindcss.com/)
+## For Bootstrap 4
+1. Publish config and change `template = 'bootstrap'` 
+
+2. Please copy this script and paste in your layout just after @livewireScripts tag
+
+```bash
+
+
+<script type="text/javascript">
+    window.livewire.on('showConfirmDelete', () => {
+        $('#deleteModal').modal('show');
+    });
+    window.livewire.on('hideConfirmDelete', () => {
+        $('#deleteModal').modal('hide');
+    });
+</script>
+
+
+```
+
+
 
 ## TODO
-- Bootstrap 4 & 5 Support
+[x] Tailwind Support
+
+[x] Bootstrap 4 & 5 Support
+
 - Bulma Support
 
 
