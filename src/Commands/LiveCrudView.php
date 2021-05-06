@@ -152,9 +152,12 @@ class LiveCrudView extends GeneratorCommand
      */
     protected function getStub()
     {
-        if (config('livecrud.template') != 'tailwind')
+        if(config('livecrud.template') == 'bootstrap')
         {
-            throw new \Exception(config('livecrud.template').' is not currently supported, only supported template is tailwind css');
+            if (file_exists(base_path() . '/stubs/bootstrap.view.php.stub')){
+                return base_path() . '/stubs/bootstrap.view.php.stub';
+            }
+            return base_path().'/vendor/imritesh/livecrud/src/stubs/bootstrap.view.php.stub';
         }
 
         if (file_exists(base_path() . '/stubs/view.php.stub')){
