@@ -61,6 +61,12 @@ php artisan crud:make Name_Of_Your_Model
     window.livewire.on('hideConfirmDelete', () => {
         $('#deleteModal').modal('hide');
     });
+    window.livewire.on('showForm', () => {
+                $('#showForm').modal('show');
+            });
+    window.livewire.on('hideForm', () => {
+        $('#showForm').modal('hide');
+    });
 </script>
 
 
