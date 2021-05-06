@@ -33,44 +33,17 @@
     <div class="flex row">
             <div class="card-body">
                 <table width="100%" class="table table-bordered">
-                    <thead>
                     <tr>
 
-                        <th scope="col">
-                            NAME
-                        </th>
+                        {{ headings }}
 
-                        <th scope="col">
-                            EMAIL
-                        </th>
-
-                        <th scope="col">
-                            PASSWORD
-                        </th>
-
-
-                        <th scope="col">
-                           <span class="float-right">Actions</span>
+                        <th scope="col" class="relative px-6 py-3">
+                            <span class="sr-only">Actions</span>
                         </th>
                     </tr>
                     </thead>
-                    <tbody>
-                    @foreach($rows as $row)
-                        <tr>
-                            <td>{{ $row->name}}</td>
-
-                            <td>{{ $row->email}}</td>
-
-                            <td>{{ $row->password}}</td>
-
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="void(0)" class="text-indigo-600 hover:text-indigo-900"
-                                   wire:click="edit({{ $row->id }})" data-toggle="modal" data-target="#exampleModal">Edit</a>
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                                   wire:click="confirmDelete({{ $row->id }})">Delete</a>
-                            </td>
-                        </tr>@endforeach
-
+                    <tbody class="bg-white divide-y divide-gray-200">
+                    {{ renderedData }}
                     </tbody>
                 </table>
                 <div class="p-2">
