@@ -2,7 +2,7 @@
     "name": "imritesh/livecrud",
     "description": "Generate Basic Crud Operations With Livewire and Tailwind Css For Laravel",
     "license": "MIT",
-    "version": "v2.1.6",
+    "version": "v2.1.7",
     "authors": [
         {
             "name": "Ritesh Singh",
