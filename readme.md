@@ -77,7 +77,6 @@ php artisan crud:make Name_Of_Your_Model
 ## TODO
 [x] Tailwind Support
 
-[x] Bootstrap 4 & 5 Support
 
 - Bulma Support
 
