@@ -75,10 +75,8 @@ php artisan crud:make Name_Of_Your_Model
 
 
 ## TODO
-[x] Tailwind Support
 
-
-- Bulma Support
+[] Bulma Support
 
 
 ## Security
