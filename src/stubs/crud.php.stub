@@ -96,7 +96,9 @@ class {{ name }} extends Component
           {{ codeTosave }}
 
           $this->resetForm();
-
+           
+          $this->showForm = false;
+          
          session()->flash('message', 'Record Updated Successfully');
     }
 
