@@ -3,7 +3,7 @@
         <div class="flex mx-auto">
             <div class="alert alert-success">
                 <span class="inline-block align-middle mr-8">
-                <b class="capitalize">Success!</b> {{ session('message') }}
+                <b class="capitalize">{{ __('Success') }}!</b> {{ session('message') }}
                 </span>
                 <button wire:click="clearFlash()"
                         class="float-right btn-xs btn btn-outline-success">
@@ -24,7 +24,7 @@
                 <button type="button"
                         class="btn btn-primary float-right"
                         wire:click="create">
-                    Add New Record
+                   {{ __('Add New Record') }}
                 </button>
             </div>
         </div>
