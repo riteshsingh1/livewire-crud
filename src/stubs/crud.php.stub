@@ -47,6 +47,7 @@ class {{ name }} extends Component
     public function create ()
     {
         $this->mode = 'create';
+        $this->resetForm();
         $this->showForm = true;
     }
 
